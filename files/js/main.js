@@ -9,36 +9,7 @@
 //    launchType: "link" (opens in new tab) or "embed" (opens
 //    an /apps/<slug>.html page with the app in an iframe)
 // -----------------------------------------------------------
-const apps = [
-  {
-    name: "GuardianGate Parent App",
-    description: "Parents approve learner collections in real time.",
-    status: "dev",
-    url: "https://parents.guardiangate.co.za",
-    subdomain: "parents.guardiangate.co.za"
-  },
-  {
-    name: "GuardianGate Security App",
-    description: "Used by security officers to verify learner collection.",
-    status: "dev",
-    url: "https://security.guardiangate.co.za",
-    subdomain: "security.guardiangate.co.za"
-  },
-  {
-    name: "GuardianGate School Dashboard",
-    description: "School administration portal for monitoring learner collections.",
-    status: "dev",
-    url: "https://dashboard.guardiangate.co.za",
-    subdomain: "dashboard.guardiangate.co.za"
-  },
-  {
-    name: "QualiBev Mobile App",
-    description: "Scan a QR/NFC tag to verify beverage authenticity in real time.",
-    status: "dev",
-    url: "#",
-    subdomain: null
-  }
-];
+
 
 // -----------------------------------------------------------
 // 2. RENDER APP CARDS
