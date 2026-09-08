@@ -122,6 +122,7 @@ button:focus-visible {
   background: rgba(23, 20, 15, 0.88);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--color-border);
+  color: #F5F1E6;
 }
 
 .header-inner {
