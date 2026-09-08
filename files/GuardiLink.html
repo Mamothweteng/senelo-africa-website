@@ -10,7 +10,41 @@
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css" />
 </head>
+<Style>
+:root {
+  /* Color — pulled from the brand mark's layered diamond gradient */
+ --color-bg: #0B3D1A; /* deep forest green */
+ --color-surface: #145A2A; /* dark green */
+ --color-surface-2: #1F7A3A; /* medium green */
+ --color-border: #2E9E4B; /* bright green border */
+
+ /* Accents */
+ --color-primary: #2E9E4B; /* main shield green */
+ --color-accent: #5ACB6A; /* light green checkmark */
+ --color-white: #FFFFFF; /* shield + icon white */
+
+ /* Text - to match on dark green bg */
+ --color-text: #F0FFF4; /* very light mint white */
+ --color-text-muted: #A8E6B3; /* soft green tint */
+ --color-text-dim: #6FAF7A; /* muted green */
+
+  --gradient-facet: linear-gradient(135deg, var(--color-accent), var(--color-primary) 40%, var(--color-border) 75%);
+
+  /* Type */
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+
+  /* Layout */
+  --max-width: 1160px;
+  --radius: 14px;
+  --radius-sm: 8px;
+}
+
+</Style>
 <body>
+
+  
 
   <!-- ===== HEADER ===== -->
   <header class="site-header">
@@ -35,21 +69,31 @@
     </div>
   </header>
 
-  <!-- ===== PAGE INTRO ===== -->
-  <section class="page-intro">
-    <div class="container">
-      <a href="projects.html" class="back-link">&larr; All projects</a>
-      <p class="eyebrow">Learner Safety Platform</p>
-      <h1>GuardiLink™</h1>
-      <p class="page-intro-lede">
+    <!-- ===== HERO ===== -->
+  <section class="hero" id="home">
+    <div class="container hero-inner">
+      <div class="hero-copy">
+        <p class="eyebrow">Secure Digital Safety &amp; Authentication Platforms</p>
+        <a href="projects.html" class="back-link">&larr; All projects</a>
+       <h1>GuardiLink™</h1>
+        <p class="page-intro-lede">
         A cloud-based learner collection management platform that lets
         schools digitally verify learner collection through secure QR
         code identification, real-time parent approval and comprehensive
         audit trails — improving learner safety and modernising school
         collection procedures while reducing administrative workload.
       </p>
+        
+      </div>
+
+      <div class="hero-visual">
+        <img src="assets/Gurdilink.jpeg" alt="Senelo Africa Group Holdings" class="hero-logo" />
+      </div>
     </div>
   </section>
+
+  <!-- ===== PAGE INTRO ===== -->
+  
 
   <!-- ===== PROJECT DETAIL ===== -->
   <section class="project-detail">

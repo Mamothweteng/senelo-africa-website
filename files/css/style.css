@@ -2,22 +2,21 @@
    SENELO AFRICA GROUP HOLDINGS — DESIGN TOKENS
    ========================================================= */
 :root {
-  /* Color — pulled from the brand mark's layered diamond gradient */
-  --color-bg: #17140F;
-  --color-surface: #211C15;
-  --color-surface-2: #2A2319;
-  --color-border: #3A3226;
+  /* Color — Senelo Africa palette */
+  --color-bg: #FFFFFF;
+  --color-surface: #F5F6F8;
+  --color-surface-2: #FFFFFF;
+  --color-border: #E2E4E8;
 
-  --color-orange: #DD7A2C;
-  --color-red: #C0392B;
-  --color-gold: #E8B23D;
-  --color-olive: #8A9A5B;
+  --color-orange: #F28C28;
+  --color-gold: #E9C84A;
+  --color-olive: #9DBA63;
 
-  --color-text: #F5F1E6;
-  --color-text-muted: #B5A996;
-  --color-text-dim: #7C7264;
+  --color-text: #2B2B2B;
+  --color-text-muted: #6B6B6B;
+  --color-text-dim: #8C8C8C;
 
-  --gradient-facet: linear-gradient(135deg, var(--color-gold), var(--color-orange) 40%, var(--color-red) 75%);
+  --gradient-facet: linear-gradient(135deg, var(--color-gold), var(--color-orange) 50%, var(--color-olive) 100%);
 
   /* Type */
   --font-display: 'Space Grotesk', sans-serif;
@@ -220,11 +219,40 @@ button:focus-visible {
   justify-content: center;
 }
 
+.hero-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  perspective: 900px;
+}
+
+.logo-glow {
+  position: absolute;
+  width: 340px;
+  height: 340px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--color-orange) 0%, var(--color-red) 35%, transparent 70%);
+  filter: blur(60px);
+  opacity: 0.35;
+  animation: pulse-glow 5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.25; transform: scale(0.95); }
+  50% { opacity: 0.45; transform: scale(1.08); }
+}
+
 .hero-logo {
   width: 280px;
   max-width: 70%;
   filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.45));
   animation: float 7s ease-in-out infinite;
+  transform-style: preserve-3d;
+  transition: transform 0.15s ease-out;
+  position: relative;
+  will-change: transform;
 }
 
 @keyframes float {

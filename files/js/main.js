@@ -89,10 +89,48 @@ function setYear() {
 }
 
 // -----------------------------------------------------------
+// HERO LOGO — MOUSE-TILT PARALLAX
+// -----------------------------------------------------------
+function setupHeroTilt() {
+  const stage = document.getElementById('heroVisual');
+  const logo = document.getElementById('heroLogo');
+  if (!stage || !logo) return;
+
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReducedMotion) return;
+
+  const maxTilt = 16;
+  let targetX = 0, targetY = 0, currentX = 0, currentY = 0;
+
+  function render() {
+    currentX += (targetX - currentX) * 0.08;
+    currentY += (targetY - currentY) * 0.08;
+    logo.style.transform = `rotateX(${currentY}deg) rotateY(${currentX}deg)`;
+    requestAnimationFrame(render);
+  }
+
+  stage.addEventListener('mousemove', (e) => {
+    const rect = stage.getBoundingClientRect();
+    const relX = (e.clientX - rect.left) / rect.width - 0.5;
+    const relY = (e.clientY - rect.top) / rect.height - 0.5;
+    targetX = relX * maxTilt * 2;
+    targetY = relY * -maxTilt * 2;
+  });
+
+  stage.addEventListener('mouseleave', () => {
+    targetX = 0;
+    targetY = 0;
+  });
+
+  requestAnimationFrame(render);
+}
+
+// -----------------------------------------------------------
 // INIT
 // -----------------------------------------------------------
 document.addEventListener('DOMContentLoaded', () => {
   renderApps();
   setupNavToggle();
   setYear();
+  setupHeroTilt();
 });
