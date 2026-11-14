@@ -128,9 +128,53 @@ function setupHeroTilt() {
 // -----------------------------------------------------------
 // INIT
 // -----------------------------------------------------------
+
+
+// -----------------------------------------------------------
+// ABOUT: slide the grey name print in when the section scrolls into view
+// -----------------------------------------------------------
+function setupAboutPrint() {
+  const about = document.getElementById('about');
+  if (!about) return;
+
+  if (!('IntersectionObserver' in window)) {
+    about.classList.add('is-visible');
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      // Slide in when 25% of the section is on screen, slide out when less
+      about.classList.toggle('is-visible', entry.intersectionRatio >= 0.25);
+    });
+  }, { threshold: 0.25 });
+
+  observer.observe(about);
+}
+function setupIndustryCarousel() {
+  const track = document.getElementById('industryTrack');
+  if (!track) return;
+
+  // Wrap the cards in a moving strip
+  const strip = document.createElement('div');
+  strip.className = 'industry-strip';
+  while (track.firstChild) strip.appendChild(track.firstChild);
+
+  // Duplicate the cards so the loop never shows a gap
+  Array.from(strip.querySelectorAll('.industry-item')).forEach((card) => {
+    const copy = card.cloneNode(true);
+    copy.setAttribute('aria-hidden', 'true');
+    strip.appendChild(copy);
+  });
+
+  track.appendChild(strip);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   renderApps();
   setupNavToggle();
   setYear();
   setupHeroTilt();
+  setupAboutPrint();
+  setupIndustryCarousel();
 });

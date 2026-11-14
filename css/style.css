@@ -119,10 +119,10 @@ button:focus-visible {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(23, 20, 15, 0.88);
+  background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--color-border);
-  color: #F5F1E6;
+  color: var(--color-text);
 }
 
 .header-inner {
@@ -156,17 +156,37 @@ button:focus-visible {
 
 .site-nav {
   display: flex;
-  gap: 32px;
+  align-items: center;
+  gap: 4px;
+  padding: 5px;
+  background: #FFFFFF;
+  border: 1.5px solid #111111;
+  border-radius: 999px;
 }
 
 .site-nav a {
-  font-size: 0.9rem;
+  font-size: 0.72rem;
   font-weight: 500;
-  color: var(--color-text-muted);
-  transition: color 0.2s ease;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #111111;
+  padding: 9px 18px;
+  border-radius: 999px;
+    transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.site-nav a:hover { color: var(--color-gold); }
+.site-nav a:hover {
+  background: var(--gradient-facet);
+  color: #111111;
+  box-shadow: 0 4px 14px rgba(242, 140, 40, 0.35);
+}
+
+/* the current page: filled black pill */
+.site-nav a.nav-active,
+.site-nav a.nav-active:hover {
+  background: #111111;
+  color: #FFFFFF;
+}
 
 .nav-toggle {
   display: none;
@@ -440,18 +460,23 @@ button:focus-visible {
   .hero-visual { order: -1; }
   .hero-logo { width: 200px; margin: 0 auto; }
 
-  .site-nav {
+    .site-nav {
     position: absolute;
     top: 100%;
-    left: 0;
-    right: 0;
-    background: var(--color-bg);
-    border-bottom: 1px solid var(--color-border);
+    left: 16px;
+    right: 16px;
+    margin-top: 10px;
+    background: #FFFFFF;
+    border: 1.5px solid #111111;
+    border-radius: 24px;
     flex-direction: column;
-    padding: 20px 24px;
-    gap: 18px;
+    align-items: stretch;
+    padding: 8px;
+    gap: 4px;
     display: none;
   }
+
+  .site-nav a { text-align: center; padding: 12px 18px; }
 
   .site-nav.open { display: flex; }
 
@@ -633,8 +658,8 @@ button:focus-visible {
 .faq-item {
   background: var(--color-bg);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
-  padding: 4px 22px;
+  border-radius: 22px;
+  padding: 4px 28px;
 }
 
 .faq-item summary {
@@ -690,7 +715,7 @@ button:focus-visible {
 /* =========================================================
    ABOUT PAGE (about.html)
    ========================================================= */
-.nav-active { color: var(--color-gold) !important; }
+
 
 .page-intro { padding: 80px 0 56px; border-bottom: 1px solid var(--color-border); }
 
@@ -991,7 +1016,7 @@ button:focus-visible {
 }
 
 /* =========================================================
-   INDUSTRIES — dark band
+   INDUSTRIES — dark band, continuously scrolling strip
    ========================================================= */
 .industries {
   background: #2B2B2B;
@@ -1005,21 +1030,35 @@ button:focus-visible {
 
 .industries h2 {
   font-size: clamp(1.7rem, 3vw, 2.25rem);
-  margin-bottom: 48px;
+  margin-bottom: 40px;
 }
 
-.industry-grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
+/* The window the cards scroll through, with soft faded edges */
+.industry-track {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+}
+
+/* The moving strip: JS doubles the cards so the loop has no gap */
+.industry-strip {
+  display: flex;
+  width: max-content;
+  animation: industry-scroll 40s linear infinite;
+}
+
+@keyframes industry-scroll {
+  to { transform: translateX(-50%); }
 }
 
 .industry-item {
-  padding: 0 24px;
-  border-left: 1px solid #4A4A4A;
+  flex: 0 0 340px;
+  margin-right: 24px; /* margin, not gap, so the loop lines up exactly */
+  background: #343434;
+  border: 1px solid #4A4A4A;
+  border-radius: var(--radius);
+  padding: 28px;
 }
-
-.industry-item:first-child { padding-left: 0; border-left: none; }
-.industry-item:last-child { padding-right: 0; }
 
 .industry-icon {
   width: 52px;
@@ -1041,19 +1080,86 @@ button:focus-visible {
 
 .industry-item p {
   color: #C4C7CC;
-  font-size: 0.88rem;
+  font-size: 0.9rem;
   line-height: 1.55;
 }
 
-/* Tablet: two columns, no dividers */
-@media (max-width: 900px) {
-  .industry-grid { grid-template-columns: repeat(2, 1fr); gap: 40px 28px; }
-  .industry-item,
-  .industry-item:first-child,
-  .industry-item:last-child { padding: 0; border-left: none; }
+@media (max-width: 560px) {
+  .industry-item { flex-basis: 280px; }
 }
 
-/* Phone: one column */
-@media (max-width: 520px) {
-  .industry-grid { grid-template-columns: 1fr; }
+/* For visitors who turn animations off: no motion, swipe instead */
+@media (prefers-reduced-motion: reduce) {
+  .industry-track {
+    overflow-x: auto;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+  .industry-item[aria-hidden="true"] { display: none; }
+}
+
+/* =========================================================
+   ABOUT: grey vertical name print that slides in on scroll
+   ========================================================= */
+.about {
+  position: relative;
+  overflow: hidden; /* stops sideways scroll while the print slides in */
+}
+
+.about .about-inner {
+  position: relative;
+  z-index: 1; /* keeps the content above the print */
+}
+
+.about-print {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 12vw;
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateX(-90px);
+  transition: opacity 1s ease, transform 1.2s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.about-print-text {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg); /* reads bottom to top */
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2.2rem, 4.2vw, 4.5rem);
+  line-height: 1;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: #C9CBD0; /* lighter = subtler, darker = stronger */
+  user-select: none;
+}
+
+.about.is-visible .about-print {
+  opacity: 1;
+  transform: none;
+}
+
+/* Not enough empty space beside the content on smaller screens */
+@media (max-width: 1100px) {
+  .about-print { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-print { transition: none; opacity: 1; transform: none; }
+}
+
+.contact-alt {
+  margin-top: 14px;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.contact-alt a {
+  color: #B45309;
+  font-weight: 500;
+  text-decoration: underline;
 }
