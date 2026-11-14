@@ -3,30 +3,27 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GuardianGate™ — Senelo Africa Group Holdings</title>
-  <meta name="description" content="GuardianGate is a cloud-based learner collection management platform for schools, using QR verification and real-time parent approval." />
+<title>GuardiLink™ — Senelo Africa Group Holdings</title>
+<meta name="description" content="GuardiLink is a cloud-based
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css" />
-</head>
-<Style>
+  <Style>
 :root {
-  /* Color — pulled from the brand mark's layered diamond gradient */
- --color-bg: #0B3D1A; /* deep forest green */
- --color-surface: #145A2A; /* dark green */
- --color-surface-2: #1F7A3A; /* medium green */
- --color-border: #2E9E4B; /* bright green border */
+  --color-bg: #FFFFFF;        /* cards sit white on the gradient */
+ --color-surface: #F0FFF4;   /* very light mint */
+ --color-surface-2: #FFFFFF;
+ --color-border: #CFE8D5;    /* soft green-grey border */
 
  /* Accents */
  --color-primary: #2E9E4B; /* main shield green */
  --color-accent: #5ACB6A; /* light green checkmark */
  --color-white: #FFFFFF; /* shield + icon white */
 
- /* Text - to match on dark green bg */
- --color-text: #F0FFF4; /* very light mint white */
- --color-text-muted: #A8E6B3; /* soft green tint */
- --color-text-dim: #6FAF7A; /* muted green */
+  --color-text: #0B3D1A;       /* deep green, readable on the gradient */
+ --color-text-muted: #1B4D28;
+ --color-text-dim: #2F6B3C;
 
   --gradient-facet: linear-gradient(135deg, var(--color-accent), var(--color-primary) 40%, var(--color-border) 75%);
 
@@ -41,7 +38,70 @@
   --radius-sm: 8px;
 }
 
+
+
+/* Light mint text is hard to read on this bright green, so use the deep green instead */
+.hero h1,
+.hero .page-intro-lede,
+.hero .eyebrow,
+.hero .back-link {
+  color: #0B3D1A;
+}
+
+body {
+  background: #72c623;
+  background: linear-gradient(315deg, #72c623 0%, #2ed378 100%);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+}
+
+/* small labels: gold is unreadable on green */
+.eyebrow,
+.back-link {
+  color: #0B3D1A;
+}
+
+.btn-154 {
+  color: #FFFFFF;
+}
+
+.btn-154 span {
+  background: #0B3D1A;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 2rem;
+  padding: 10px 18px;
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+/* the outer ring: faint at rest, solid on hover */
+.btn-154::before {
+  display: block;
+  background: #0B3D1A;
+  border: 2px solid #FFFFFF;
+  border-radius: 2rem;
+  width: 108%;
+  left: -4%;
+  opacity: 0.2;
+}
+
+.btn-154:hover::before {
+  opacity: 1;
+}
+
+.btn-154:hover svg {
+  width: 20px;
+}
+
+.faq-item summary::after { color: #1F7A3A; }
+.project-detail .btn-154 { margin-top: 12px; }
 </Style>
+</head>
+
 <body>
 
   
@@ -138,17 +198,17 @@
           <div class="portal-item">
             <h3>Parent Portal</h3>
             <p>Parents approve learner collections in real time.</p>
-            <span class="app-subdomain">parents.guardiangate.co.za</span>
+            <span class="app-subdomain">parents.guardilink.co.za</span>
           </div>
           <div class="portal-item">
             <h3>Security Portal</h3>
             <p>Used by security officers to verify learner collection.</p>
-            <span class="app-subdomain">security.guardiangate.co.za</span>
+            <span class="app-subdomain">security.guardilink.co.za</span>
           </div>
           <div class="portal-item">
             <h3>School Dashboard</h3>
             <p>School administration portal for monitoring learner collections.</p>
-            <span class="app-subdomain">dashboard.guardiangate.co.za</span>
+            <span class="app-subdomain">dashboard.guardilink.co.za</span>
           </div>
         </div>
       </div>
@@ -161,7 +221,7 @@
             <p>Yes — parents can manage multiple authorised collectors.</p>
           </details>
           <details class="faq-item">
-            <summary>Does GuardianGate work on mobile phones?</summary>
+           <summary>Does GuardiLink work on mobile phones?</summary>
             <p>Yes — parents receive notifications and approve collections directly from their smartphones.</p>
           </details>
           <details class="faq-item">
@@ -174,8 +234,10 @@
           </details>
         </div>
       </div>
-
-      <a href="index.html#contact" class="btn btn-primary btn-large">Request a personalised demonstration</a>
+<a href="index.html#contact" class="btn-154">
+  <span>Request a demo</span>
+  <svg xmlns="http://www.w3.org/2000/svg" fill="currentcolor" viewBox="0 0 24 24"><path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path></svg>
+</a>
     </div>
   </section>
 

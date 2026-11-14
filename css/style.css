@@ -603,19 +603,7 @@ button:focus-visible {
 /* =========================================================
    INDUSTRIES
    ========================================================= */
-.industries { padding: 56px 0; }
 
-.industry-row { display: flex; flex-wrap: wrap; gap: 12px; }
-
-.industry-pill {
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  padding: 10px 18px;
-  border-radius: var(--radius-sm);
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  color: var(--color-text-muted);
-}
 
 /* =========================================================
    APP CARDS — non-clickable "in development" state
@@ -883,4 +871,189 @@ button:focus-visible {
 @media (max-width: 700px) {
   .project-grid { grid-template-columns: 1fr; }
   .project-detail .detail-cols { grid-template-columns: 1fr; gap: 28px; }
+}
+
+/* =========================================================
+   ANIMATED ARROW BUTTON
+   ========================================================= */
+.btn-154 {
+  position: relative;
+  transition: all .5s;
+  border: none;
+  background: none;
+  font-family: var(--font-body);
+  cursor: pointer;
+  text-decoration: none;
+  user-select: none;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  color: var(--color-text);
+  z-index: 1;
+}
+
+.btn-154 span {
+  display: flex;
+  align-items: center;
+  letter-spacing: 2px;
+  font-weight: bold;
+  background: var(--gradient-facet);
+  border-radius: 2rem;
+  padding: 15px 22px;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+
+.btn-154::before {
+  content: '';
+  z-index: -1;
+  background: var(--gradient-facet);
+  border: 2px solid var(--color-orange);
+  border-radius: 2rem;
+  width: 110%;
+  height: 100%;
+  position: absolute;
+  left: -5%;
+  transition: .5s;
+  opacity: 0.2;
+  box-sizing: content-box;
+}
+
+.btn-154:hover::before {
+  transform: rotate(0deg);
+  opacity: 1;
+}
+
+.btn-154 svg {
+  transform: translateX(-200%);
+  transition: .5s;
+  width: 0;
+  opacity: 0;
+}
+
+.btn-154:hover svg {
+  width: 25px;
+  transform: translateX(0%);
+  opacity: 1;
+}
+
+.btn-154:active { filter: brightness(1.1); }
+
+.btn-154:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 6px;
+}
+
+/* Larger version (replaces btn-large) */
+.btn-154.btn-large span { padding: 18px 30px; font-size: 15px; }
+
+/* Keep it from stretching inside the project cards */
+.project-card .btn-154 { align-self: flex-start; margin-top: 6px; }
+
+/* =========================================================
+   FAQ — logo "print" that appears when a card is open
+   ========================================================= */
+.faq-item {
+  position: relative;
+  overflow: hidden;
+}
+
+.faq-item::after {
+  content: '';
+  position: absolute;
+  right: -16px;
+  bottom: -28px;
+  width: 240px;
+  height: 260px;
+  background: url('../assets/logo.png') no-repeat center / contain;
+  opacity: 0;
+  transform: translateY(14px) scale(0.96);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  pointer-events: none;
+  
+}
+
+.faq-item[open]::after {
+  opacity: 0.12;
+  transform: none;
+}
+
+/* Keep the question and answer above the print */
+.faq-item summary,
+.faq-item p {
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 600px) {
+  .faq-item::after { width: 150px; height: 165px; right: -20px; bottom: -24px; }
+}
+
+/* =========================================================
+   INDUSTRIES — dark band
+   ========================================================= */
+.industries {
+  background: #2B2B2B;
+  padding: 72px 0;
+}
+
+.industries .eyebrow { color: #E9C84A; }
+
+.industries h2,
+.industries h3 { color: #FFFFFF; }
+
+.industries h2 {
+  font-size: clamp(1.7rem, 3vw, 2.25rem);
+  margin-bottom: 48px;
+}
+
+.industry-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.industry-item {
+  padding: 0 24px;
+  border-left: 1px solid #4A4A4A;
+}
+
+.industry-item:first-child { padding-left: 0; border-left: none; }
+.industry-item:last-child { padding-right: 0; }
+
+.industry-icon {
+  width: 52px;
+  height: 52px;
+  border: 1px solid #4A4A4A;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #E9C84A;
+  margin-bottom: 20px;
+}
+
+.industry-item h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.industry-item p {
+  color: #C4C7CC;
+  font-size: 0.88rem;
+  line-height: 1.55;
+}
+
+/* Tablet: two columns, no dividers */
+@media (max-width: 900px) {
+  .industry-grid { grid-template-columns: repeat(2, 1fr); gap: 40px 28px; }
+  .industry-item,
+  .industry-item:first-child,
+  .industry-item:last-child { padding: 0; border-left: none; }
+}
+
+/* Phone: one column */
+@media (max-width: 520px) {
+  .industry-grid { grid-template-columns: 1fr; }
 }
