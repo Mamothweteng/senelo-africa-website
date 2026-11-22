@@ -18,10 +18,14 @@
 
   --gradient-facet: linear-gradient(135deg, var(--color-gold), var(--color-orange) 50%, var(--color-olive) 100%);
 
-  /* Type */
+   /* Type */
+  --font-display: 'GFS Didot', serif;          /* headings */
+  --font-body: 'Montserrat', sans-serif;       /* body text, buttons, nav */
+  --font-mono: 'Josefin Sans', sans-serif;     /* small uppercase labels */
+  /* previous fonts, to revert:
   --font-display: 'Space Grotesk', sans-serif;
   --font-body: 'Inter', sans-serif;
-  --font-mono: 'IBM Plex Mono', monospace;
+  --font-mono: 'IBM Plex Mono', monospace; */
 
   /* Layout */
   --max-width: 1160px;
@@ -1016,10 +1020,10 @@ button:focus-visible {
 }
 
 /* =========================================================
-   INDUSTRIES — dark band, continuously scrolling strip
+   INDUSTRIES — dark band, continuously scrolling strip #2B2B2B;
    ========================================================= */
 .industries {
-  background: #2B2B2B;
+  background: #181c44;
   padding: 72px 0;
 }
 
@@ -1334,3 +1338,5 @@ button:focus-visible {
   background: var(--color-navy);
   color: #FFFFFF;
 }
+/* Font change: GFS Didot has only one weight, so never fake a bold. Delete this block if you revert the fonts. */
+html { font-synthesis: none; }

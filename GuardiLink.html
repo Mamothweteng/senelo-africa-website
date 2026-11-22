@@ -7,66 +7,107 @@
   <meta name="description" content="GuardiLink is a cloud-based learner collection management platform for schools, using QR verification and real-time parent approval." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=GFS+Didot&family=Josefin+Sans:wght@400;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css" />
-  <style>
+    <style>
     :root {
-      --color-bg: #FFFFFF;        /* cards sit white on the gradient */
-      --color-surface: #F0FFF4;   /* very light mint */
-      --color-surface-2: #FFFFFF;
-      --color-border: #CFE8D5;    /* soft green-grey border */
+      /* Forest greens, sampled from the GuardiLink logo */
+      --forest-dark: #0D2D1E;
+      --forest: #15452C;
+      --forest-light: #1F6B3F;
+      --tick: #78C958; /* the green of the logo's tick */
 
-      /* Accents */
-      --color-primary: #2E9E4B;
-      --color-accent: #5ACB6A;
-      --color-white: #FFFFFF;
+      /* Soft grey cards, same as the Mission / Vision cards */
+      --color-bg: #FFFFFF;
+      --color-surface: #E8EAEE;
+      --color-surface-2: #E8EAEE;
+      --color-border: rgba(255, 255, 255, 0.18);
 
-      --color-text: #0B3D1A;      /* deep green, readable on the gradient */
-      --color-text-muted: #1B4D28;
-      --color-text-dim: #2F6B3C;
+      /* Light text for the dark page (cards below set their own dark text) */
+      --color-text: #F1F8F3;
+      --color-text-muted: #C9E3D1;
+      --color-text-dim: #9CC4A9;
 
-      --gradient-facet: linear-gradient(135deg, var(--color-accent), var(--color-primary) 40%, var(--color-border) 75%);
-
-      /* Type */
-      --font-display: 'Space Grotesk', sans-serif;
-      --font-body: 'Inter', sans-serif;
-      --font-mono: 'IBM Plex Mono', monospace;
-
-      /* Layout */
-      --max-width: 1160px;
-      --radius: 14px;
-      --radius-sm: 8px;
-    }
-
-    /* Light mint text is hard to read on this bright green, so use the deep green instead */
-    .hero h1,
-    .hero .page-intro-lede,
-    .hero .eyebrow,
-    .hero .back-link {
-      color: #0B3D1A;
+      --gradient-facet: linear-gradient(135deg, #A8E6B3, var(--tick));
     }
 
     body {
-      background: #72c623;
-      background: linear-gradient(315deg, #72c623 0%, #2ed378 100%);
+      background: #15452C;
+      background: linear-gradient(135deg, var(--forest-dark) 0%, var(--forest) 45%, var(--forest-light) 100%);
       background-attachment: fixed;
       background-repeat: no-repeat;
       min-height: 100vh;
+      color: var(--color-text);
     }
 
-    /* small labels: gold is unreadable on green */
-    .eyebrow,
-    .back-link {
-      color: #0B3D1A;
+    /* The white header keeps dark text */
+    .site-header { color: #2B2B2B; }
+    .brand-sub { color: #6B6B6B; }
+    .nav-toggle span { background: #2B2B2B; }
+
+    /* Small labels on the green */
+    .eyebrow, .back-link { color: #A8E6B3; }
+    .back-link:hover { color: #FFFFFF; }
+    .hero h1 { color: #FFFFFF; }
+
+    .hero-logo { filter: drop-shadow(0 18px 36px rgba(0, 0, 0, 0.4)); }
+
+    /* FAQ cards: soft grey, rounded */
+    .faq-item {
+      background: var(--color-surface);
+      border: none;
+      border-radius: 22px;
+      color: #2B2B2B;
+    }
+    .faq-item p { color: #555555; }
+    .faq-item summary::after { color: #1F7A3A; }
+
+    /* Portals: big grey vertical word + grey card, like Mission / Vision */
+    .project-detail .detail-block--wide { max-width: none; }
+
+    .portal-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
     }
 
-    .btn-154 {
-      color: #FFFFFF;
+    .portal-card {
+      display: flex;
+      align-items: stretch;
+      gap: 14px;
     }
+
+    .portal-card .mission-label {
+      align-self: center;
+      font-size: 1.7rem;
+    }
+
+    .portal-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 8px;
+      padding: 24px 26px;
+      background: var(--color-surface);
+      border-radius: 22px;
+      color: #2B2B2B;
+    }
+
+    .portal-body h3 { font-size: 1.05rem; color: #2B2B2B; }
+    .portal-body p { font-size: 0.88rem; color: #555555; }
+    .portal-body .app-subdomain { color: #6B6B6B; font-size: 0.76rem; word-break: break-all; }
+
+    @media (max-width: 900px) {
+      .portal-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Button: small pill in the tick green, dark text */
+    .btn-154 { color: #0B3D1A; }
 
     .btn-154 span {
-      background: #0B3D1A;
-      color: #FFFFFF;
+      background: var(--tick);
+      color: #0B3D1A;
       border: none;
       border-radius: 2rem;
       padding: 10px 18px;
@@ -79,23 +120,17 @@
     /* the outer ring: faint at rest, solid on hover */
     .btn-154::before {
       display: block;
-      background: #0B3D1A;
-      border: 2px solid #FFFFFF;
+      background: var(--tick);
+      border: 2px solid var(--tick);
       border-radius: 2rem;
       width: 108%;
       left: -4%;
       opacity: 0.2;
     }
 
-    .btn-154:hover::before {
-      opacity: 1;
-    }
-
-    .btn-154:hover svg {
-      width: 20px;
-    }
-
-    .faq-item summary::after { color: #1F7A3A; }
+    .btn-154:hover::before { opacity: 1; }
+    .btn-154:hover svg { width: 20px; }
+    .btn-154:focus-visible { outline-color: #FFFFFF; }
     .project-detail .btn-154 { margin-top: 12px; }
   </style>
 </head>
@@ -142,7 +177,7 @@
       </div>
 
       <div class="hero-visual">
-        <img src="assets/Gurdilink.jpeg" alt="GuardiLink platform preview" class="hero-logo" />
+        <img src="assets/guardilink-logo.png" alt="GuardiLink platform preview" class="hero-logo" />
       </div>
     </div>
   </section>
@@ -184,24 +219,37 @@
         </p>
       </div>
 
-      <div class="detail-block">
+            <div class="detail-block detail-block--wide">
         <h2>The Portals</h2>
-        <div class="portal-row">
-          <div class="portal-item">
-            <h3>Parent Portal</h3>
-            <p>Parents approve learner collections in real time.</p>
-            <span class="app-subdomain">parents.guardilink.co.za</span>
+        <div class="portal-grid">
+
+          <div class="portal-card">
+            <span class="mission-label">Parent</span>
+            <div class="portal-body">
+              <h3>Parent Portal</h3>
+              <p>Parents approve learner collections in real time.</p>
+              <span class="app-subdomain">parents.guardilink.co.za</span>
+            </div>
           </div>
-          <div class="portal-item">
-            <h3>Security Portal</h3>
-            <p>Used by security officers to verify learner collection.</p>
-            <span class="app-subdomain">security.guardilink.co.za</span>
+
+          <div class="portal-card">
+            <span class="mission-label">Security</span>
+            <div class="portal-body">
+              <h3>Security Portal</h3>
+              <p>Used by security officers to verify learner collection.</p>
+              <span class="app-subdomain">security.guardilink.co.za</span>
+            </div>
           </div>
-          <div class="portal-item">
-            <h3>School Dashboard</h3>
-            <p>School administration portal for monitoring learner collections.</p>
-            <span class="app-subdomain">dashboard.guardilink.co.za</span>
+
+          <div class="portal-card">
+            <span class="mission-label">School</span>
+            <div class="portal-body">
+              <h3>School Dashboard</h3>
+              <p>School administration portal for monitoring learner collections.</p>
+              <span class="app-subdomain">dashboard.guardilink.co.za</span>
+            </div>
           </div>
+
         </div>
       </div>
 
@@ -210,19 +258,19 @@
         <div class="faq-list">
           <details class="faq-item">
             <summary>Can more than one guardian collect a learner?</summary>
-            <p>Yes — parents can manage multiple authorised collectors.</p>
+            <p>Yes, parents can manage multiple authorised collectors.</p>
           </details>
           <details class="faq-item">
             <summary>Does GuardiLink work on mobile phones?</summary>
-            <p>Yes — parents receive notifications and approve collections directly from their smartphones.</p>
+            <p>Yes, parents receive notifications and approve collections directly from their smartphones.</p>
           </details>
           <details class="faq-item">
             <summary>Is there a record of every collection?</summary>
-            <p>Yes — every collection is permanently recorded with date, time and authorised collector information.</p>
+            <p>Yes, every collection is permanently recorded with date, time and authorised collector information.</p>
           </details>
           <details class="faq-item">
             <summary>Does GuardiLink integrate with existing security systems?</summary>
-            <p>Yes — it complements access control, facial recognition, CCTV and visitor management systems.</p>
+            <p>Yes, it complements access control, facial recognition, CCTV and visitor management systems.</p>
           </details>
         </div>
       </div>
