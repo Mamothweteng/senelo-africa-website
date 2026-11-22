@@ -170,6 +170,37 @@ function setupIndustryCarousel() {
   track.appendChild(strip);
 }
 
+// -----------------------------------------------------------
+// ABOUT: scale the SENEMATI print so its letters fill the section height
+// -----------------------------------------------------------
+function fitAboutPrint() {
+  const about = document.getElementById('about');
+  const print = about ? about.querySelector('.about-print') : null;
+  const text = print ? print.querySelector('.about-print-text') : null;
+  const row = about ? about.querySelector('.mission-row') : null;
+  if (!text || !row || print.offsetParent === null) return; // hidden on small screens
+
+  const fill = 0.58; // share of the section height the word covers (0.5 = smaller, 0.7 = bigger)
+
+  // size the word
+  text.style.fontSize = '100px';
+  const naturalLength = text.getBoundingClientRect().height;
+  const fitToHeight = 100 * (about.clientHeight * fill) / naturalLength;
+  const fitToWidth = print.clientWidth * 0.8; // never wider than the empty space
+  text.style.fontSize = Math.min(fitToHeight, fitToWidth) + 'px';
+  const length = text.getBoundingClientRect().height;
+
+  // centre the word on the middle of the Mission / Vision row
+  const a = about.getBoundingClientRect();
+  const r = row.getBoundingClientRect();
+  const rowCenter = r.top - a.top + r.height / 2;
+  let top = rowCenter - length / 2;
+  top = Math.max(24, Math.min(top, about.clientHeight - length - 24)); // stay inside the section
+
+  print.style.top = top + 'px';
+  print.style.bottom = 'auto';
+  print.style.height = length + 'px';
+}
 document.addEventListener('DOMContentLoaded', () => {
   renderApps();
   setupNavToggle();
@@ -177,4 +208,8 @@ document.addEventListener('DOMContentLoaded', () => {
   setupHeroTilt();
   setupAboutPrint();
   setupIndustryCarousel();
+    fitAboutPrint();
+  window.addEventListener('resize', fitAboutPrint);
+  window.addEventListener('load', fitAboutPrint);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitAboutPrint);
 });

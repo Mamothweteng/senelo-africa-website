@@ -253,7 +253,7 @@ button:focus-visible {
   width: 340px;
   height: 340px;
   border-radius: 50%;
-  background: radial-gradient(circle, var(--color-orange) 0%, var(--color-red) 35%, transparent 70%);
+  background: radial-gradient(circle, var(--color-orange) 0%, var(--color-gold) 35%, transparent 70%);
   filter: blur(60px);
   opacity: 0.35;
   animation: pulse-glow 5s ease-in-out infinite;
@@ -991,7 +991,7 @@ button:focus-visible {
   bottom: -28px;
   width: 240px;
   height: 260px;
-  background: url('../assets/logo.png') no-repeat center / contain;
+  background: url('../assets/logo-mark.png') no-repeat center / contain;
   opacity: 0;
   transform: translateY(14px) scale(0.96);
   transition: opacity 0.4s ease, transform 0.4s ease;
@@ -1162,4 +1162,175 @@ button:focus-visible {
   color: #B45309;
   font-weight: 500;
   text-decoration: underline;
+}
+
+/* =========================================================
+   SeneMati brand
+   ========================================================= */
+.brand-accent { color: #0B838D; }
+
+.hero-logo--brand {
+  width: 440px;
+  max-width: 92%;
+  filter: drop-shadow(0 14px 28px rgba(0, 0, 0, 0.18));
+}
+
+@media (max-width: 860px) {
+  .hero-logo--brand { width: 300px; }
+}
+
+/* =========================================================
+   MISSION / VISION: grey vertical labels + slightly grey cards,
+   centred on the same line as the SENEMATI print
+   ========================================================= */
+
+/* The row that holds Mission + Vision and anchors the SENEMATI print */
+.about .mission-row {
+  position: relative;
+  margin-top: 40px;
+  margin-bottom: 72px; /* space before the values pills: raise to push them lower */
+}
+
+.about .mission-grid {
+  margin-bottom: 0;
+  gap: 36px;
+}
+
+/* SENEMATI is now centred on this row, so all the middles line up exactly */
+
+
+.mission-card {
+  display: flex;
+  align-items: stretch; /* the grey card fills the row height */
+  gap: 16px;
+  background: none;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+}
+
+.mission-label {
+  align-self: center; /* each label sits in the exact middle of its own card */
+  flex-shrink: 0;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg); /* reads bottom to top */
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(2.2rem, 4.2vw, 4.5rem); /* same size as the SeneMati print */
+  line-height: 1;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #C9CBD0; /* same grey as the SeneMati print */
+  margin-bottom: 0;
+  user-select: none;
+}
+
+/* the slightly grey card, with the text in its middle */
+.mission-card p {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: 28px 30px;
+  background: #E8EAEE;
+  border-radius: 22px;
+  color: #555555;
+}
+
+/* Homepage only: the labels slide in just after the SeneMati print */
+.about .mission-label {
+  opacity: 0;
+  translate: -28px 0;
+  transition: opacity 0.9s ease 0.15s, translate 1.1s cubic-bezier(0.22, 0.61, 0.36, 1) 0.15s;
+}
+
+.about.is-visible .mission-label {
+  opacity: 1;
+  translate: 0 0;
+}
+
+/* Tablets and phones: the print is hidden, so no extra space is needed */
+@media (max-width: 1100px) {
+  .about .mission-row { margin-top: 0; margin-bottom: 40px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about .mission-label { opacity: 1; translate: none; transition: none; }
+}
+/* =========================================================
+   SENEMATI print: full section height, centred in the left margin
+   ========================================================= */
+.about .about-print {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: calc((100% - 720px) / 2 + 24px); /* exactly the empty space left of the content */
+  justify-content: center;                /* centred in that space */
+}
+
+.about .about-print-text {
+  font-size: clamp(6rem, 12vw, 11rem);    /* fallback only: the script below fits it to the section */
+  letter-spacing: 0.04em;
+  translate: 0 -0.02em;                   /* evens out the trailing letter-spacing */
+}
+/* SENEMATI print: softer and more refined */
+.about .about-print-text {
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  translate: 0 -0.04em; /* evens out the trailing letter-spacing */
+  color: #D8DADF;
+}
+/* =========================================================
+   SeneMati brand colours: navy first, teal as the accent
+   ========================================================= */
+:root {
+  --color-navy: #012E5B;
+  --color-teal: #0B838D;
+  --gradient-brand: linear-gradient(135deg, var(--color-navy) 0%, var(--color-navy) 40%, var(--color-teal) 100%);
+}
+
+/* Pill buttons with the arrow (View our Projects, More Info, email, etc.) */
+.btn-154 { color: #FFFFFF; }
+
+.btn-154 span { background: var(--gradient-brand); }
+
+.btn-154::before {
+  background: var(--gradient-brand);
+  border-color: var(--color-teal);
+}
+
+.btn-154:focus-visible { outline-color: var(--color-teal); }
+
+/* Solid rectangle button (if you still use it anywhere) */
+.btn-primary {
+  background: var(--gradient-brand);
+  color: #FFFFFF;
+}
+
+/* Outlined buttons (More about us, Explore our solutions) */
+.btn-ghost {
+  border: 1.5px solid var(--color-navy);
+  color: var(--color-navy);
+  transition: transform 0.15s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.btn-ghost:hover {
+  background: var(--color-navy);
+  color: #FFFFFF;
+  border-color: var(--color-navy);
+}
+/* Navbar in the same colours */
+.site-nav { border-color: var(--color-navy); }
+
+.site-nav a { color: var(--color-navy); }
+
+.site-nav a:hover {
+  background: var(--gradient-brand);
+  color: #FFFFFF;
+  box-shadow: 0 4px 14px rgba(1, 46, 91, 0.30);
+}
+
+.site-nav a.nav-active,
+.site-nav a.nav-active:hover {
+  background: var(--color-navy);
+  color: #FFFFFF;
 }
